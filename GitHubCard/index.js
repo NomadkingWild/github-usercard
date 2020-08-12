@@ -1,9 +1,17 @@
+import axios from 'axios'
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+// const axios = require('axios');
+axios.get('https://api.github.com/users/NomadkingWild')
+.then(response =>{
+  console.log(response)
+})
+.catch(error =>{
+  debugger
+})
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -49,8 +57,52 @@ const followersArray = [];
       </div>
     </div>
 */
+function profileMaker(objectData){
 
+
+  const proCard = document.createElement('div')
+  const image = document.createElement('img')
+  const infoCard = document.createElement('div')
+  const name = document.createElement('h3')
+  const userName = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const gitHubURL = document.createElement('a')
+  const follower = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  proCard.appendChild(image);
+  proCard.appendChild(infoCard);
+  infoCard.appendChild(name);
+  infoCard.appendChild(userName);
+  infoCard.appendChild(location);
+  infoCard.appendChild(profile);
+  profile.appendChild(gitHubURL);
+  infoCard.appendChild(follower);
+  infoCard.appendChild(following);
+  infoCard.appendChild(bio);
+
+ proCard.className = "card";
+ infoCard.className = 'card-info';
+ name.className = 'name';
+ userName.className = 'username';
+
+ image.src = objectData.avatar_url;
+ name.textContent = objectData.name;
+ userName.textContent = objectData.login;
+ location.textContent = `location:${objectData.location}`;
+ profile.textContent = "profile";
+ gitHubURL.href = objectData.html_url;
+ follower.textContent = objectData.followers;
+ following.textContent = objectData.following;
+ bio.textContent = `bio:${objectData.bio}`;
+
+ return proCard
+}
+console.log(profileMaker())
 /*
+
   List of LS Instructors Github username's:
     tetondan
     dustinmyers
